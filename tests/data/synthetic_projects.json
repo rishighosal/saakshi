@@ -1,0 +1,61 @@
+{
+  "organisation": "Green Delta Collective (demo NGO)",
+  "projects": [
+    {
+      "id": "clean-streets-kolkata",
+      "name": "Clean Streets Kolkata",
+      "activity": "Neighbourhood waste clean-up drives",
+      "description": "Volunteer clean-ups of littered street corners and drains across Kolkata. Each spot is photographed before and after the drive.",
+      "lat": 22.5726,
+      "lon": 88.3639,
+      "radius_m": 30000,
+      "start_date": "2026-09-01",
+      "end_date": "2026-12-31",
+      "sites": []
+    },
+    {
+      "id": "mangrove-gosaba",
+      "name": "Mangrove Restoration, Gosaba",
+      "activity": "Mangrove planting on eroding embankments",
+      "description": "Planting mangrove saplings along embankments in the Sundarbans to slow erosion and protect villages from storm surges.",
+      "lat": 22.165,
+      "lon": 88.807,
+      "radius_m": 8000,
+      "start_date": "2026-06-01",
+      "end_date": "2027-03-31",
+      "sites": [
+        {
+          "id": "gosaba-embankment-north",
+          "name": "Embankment North",
+          "lat": 22.1712,
+          "lon": 88.8021
+        },
+        {
+          "id": "gosaba-creek-mouth",
+          "name": "Creek Mouth",
+          "lat": 22.1598,
+          "lon": 88.8134
+        }
+      ]
+    },
+    {
+      "id": "pond-revival-south-kolkata",
+      "name": "Pond Revival, South Kolkata",
+      "activity": "De-silting and cleaning neighbourhood ponds",
+      "description": "Removing waste and silt from neighbourhood ponds and planting the banks, with residents' committees maintaining them afterwards.",
+      "lat": 22.488,
+      "lon": 88.3785,
+      "radius_m": 2000,
+      "start_date": "2026-08-01",
+      "end_date": "2026-12-31",
+      "sites": [
+        {
+          "id": "pond-a",
+          "name": "Pond A",
+          "lat": 22.487,
+          "lon": 88.379
+        }
+      ]
+    }
+  ]
+}
