@@ -119,3 +119,16 @@ def test_rebuild_keeps_faces_blurred_checks_and_paid_ai_text(tmp_path, photos, m
         assert a["has_exif"] == was["has_exif"] and a["dhash"] == was["dhash"]
     assert again.db.pairs()[0]["change_text"] == first.db.pair(pair["id"])["change_text"]
     assert len(again.present_pair(again.db.pairs()[0])["campaign"]) == 6
+
+
+def test_a_flagged_photo_is_never_a_projects_cover_when_others_exist(tmp_path, photos):
+    with _client(tmp_path, None) as c:
+        def up(name, **form):
+            return c.post("/api/upload", data=form, files=[("files", (name, (photos / name).read_bytes(), "image/jpeg"))]).json()
+
+        up("pond-a_after.jpg")  # the original, in the pond project
+        assert up("no-gps_saplings.jpg", project_id="clean-streets-kolkata")["results"][0]["integrity_level"] == "review"
+        flagged = up("reused_pond-photo.jpg", project_id="clean-streets-kolkata")["results"][0]  # the pond photo again: reuse
+        assert flagged["integrity_level"] == "flagged"
+        cover = next(p for p in c.get("/api/overview").json()["projects"] if p["id"] == "clean-streets-kolkata")["cover"]
+        assert cover and flagged["id"] not in cover

@@ -125,8 +125,9 @@ def create_app(settings: ImpactSettings, service: Optional[ImpactService] = None
         }
 
     def _cover(assets):
-        verified = [a for a in assets if a.get("integrity_level") == "verified"]
-        pick = (verified or assets or [None])[0]
+        # a project's face is its best evidence: verified, else under review; a flagged photo only if nothing else
+        by_level = {lvl: [a for a in assets if a.get("integrity_level") == lvl] for lvl in ("verified", "review")}
+        pick = (by_level["verified"] or by_level["review"] or assets or [None])[0]
         return svc.present(pick)["public_thumb_url"] if pick else None
 
     # -------------------------------------------------------------- projects
