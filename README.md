@@ -123,7 +123,7 @@ Every requirement mapped to code, tests and the demo, plus the engineering decis
 
 ## Run it
 
-**Live demo (Saakshi Impact): LIVE_URL.** This public demo is read-only to protect the AI quota: browse the evidence, before/after pairs, reports and provenance, watch the [demo video](VIDEO_URL), or run it on your own machine as below.
+**Live demo (Saakshi Impact): https://saakshi-impact.onrender.com** (free plan: the first visit after a quiet spell takes about a minute to wake up). This public demo is read-only to protect the AI quota: browse the evidence, before/after pairs, reports and provenance, or run it on your own machine as below. To fit the free plan's memory, search on the server matches notes, AI tags and captions; image search with CLIP runs on the field devices.
 
 **One command** (Docker): Qdrant in cluster mode, the cloud app, and two field devices.
 
@@ -192,8 +192,8 @@ docs/                  WHY, PS03 deep dive, benchmarks, comparison, deploy, setu
 
 | Name | Role | Links |
 |---|---|---|
-| Rishi Ghosal | Architect and lead developer: edge memory, sync engine and benchmarks | [GitHub](https://github.com/rishighosal) · [LinkedIn](https://linkedin.com/in/...) |
-| Sudip Manna | Cloud platform: Cloudinary pipeline and Impact backend (PS02) | [GitHub](https://github.com/Sudip-005) · [LinkedIn](https://linkedin.com/in/...) |
+| Sudip Manna | Team leader; cloud platform: Cloudinary pipeline and Impact backend (PS02) | [GitHub](https://github.com/Sudip-005) · [LinkedIn](https://linkedin.com/in/...) |
+| Rishi Ghosal | Architect and lead developer: edge memory, sync engine, benchmarks and system integration | [GitHub](https://github.com/rishighosal) · [LinkedIn](https://linkedin.com/in/...) |
 | Agnibha Kundu | Frontend & UX: both UIs, tour, PWA, screenshots | [GitHub](https://github.com/Agnibhakundu350) · [LinkedIn](https://linkedin.com/in/...) |
 | Subhankar Nandi | DevOps, testing & docs | [GitHub](https://github.com/Subhankarnandi777) · [LinkedIn](https://linkedin.com/in/...) |
 
