@@ -10,6 +10,8 @@
 
 *Saakshi* (साक्षी / সাক্ষী) means **witness**.
 
+**Live demo: [saakshi-impact.onrender.com](https://saakshi-impact.onrender.com)**, the NGO office dashboard (read-only; the first visit after a quiet spell takes about a minute to wake up). The field app runs on the officer's device: [run it yourself](#run-it) in a few minutes.
+
 NGO and CSR field teams prove their work with photos: embankments planted, ponds cleaned, drains unblocked. The photos are taken where the network is weak or gone, and they decide wages, grants and trust. Today they pile up in phone galleries and WhatsApp groups that strip their location, nobody in the field can search what a colleague already reported, an urgent "the embankment is breached" photo waits behind forty routine ones, and a photo reused from another project looks exactly like new evidence.
 
 Saakshi is one system in two parts:
@@ -84,7 +86,7 @@ flowchart LR
 ```
 
 1. **Capture offline.** GPS and time come from the photo; it is placed on a project and site, faces are detected, and it becomes a point in the device's Qdrant Edge shard (CLIP image vector, BM25 vector of the note, payload). Searchable immediately, network or not.
-2. **Search and ask offline.** Dense + keyword search fused with RRF, recency and distance re-scoring (Qdrant formulas), geo and payload filters, MMR for variety, across the device's own shard and its region mirrors. **Ask** answers questions like "what is the latest at Pond A?" from that memory, citing each photo.
+2. **Search and ask offline.** Dense + keyword search fused with RRF, recency and distance re-scoring (Qdrant formulas), geo and payload filters, MMR for variety, across the device's own shard and its region mirrors. **Ask** answers questions like "what is the latest at the plantation strip?" from that memory, citing each photo.
 3. **Decide what leaves, and say why.** Private items never leave; faces without consent leave only blurred; repeat shots are linked; urgent reports jump the queue; on a measured slow link routine photos wait or go compressed. Vectors (a few KB) always go first.
 4. **Sync by region.** The server keeps one shard per project region (custom sharding). Devices mirror only their regions: a snapshot the first time, then just the changed points, or a partial snapshot when many changed; nothing when nothing changed.
 5. **Verify in the cloud, and bring the verdict back.** Cloudinary AI Vision tags and captions each photo; it is checked against every earlier submission, the project area and dates. The verdict is written into the shared point and reaches the officer's device, and colleagues' devices, on the next pull.
@@ -117,13 +119,15 @@ Every requirement mapped to code, tests and the demo, plus the engineering decis
 | Reliable insights | **Integrity score** per photo: camera metadata, GPS inside the project area, date inside the project window, editing software, blur, and **reuse detection** (SHA-256, pHash/dHash, CLIP) across all projects. |
 
 <p align="center">
-  <img src="docs/screenshots/impact-overview.png" width="49%" alt="Impact overview">
-  <img src="docs/screenshots/impact-before-after.png" width="49%" alt="Before and after">
+  <img src="docs/screenshots/impact-overview.png" width="49%" alt="Impact overview: what the platform does and the numbers from the evidence">
+  <img src="docs/screenshots/impact-before-after.png" width="49%" alt="Before and after with a slider and the AI Vision description of the change">
+  <img src="docs/screenshots/impact-evidence.png" width="49%" alt="A reused photo flagged: near-identical photo already submitted for another project">
+  <img src="docs/screenshots/impact-map.png" width="49%" alt="Project areas and photo locations on the map">
 </p>
 
 ## Run it
 
-**Live demo (Saakshi Impact): https://saakshi-impact.onrender.com** (free plan: the first visit after a quiet spell takes about a minute to wake up). This public demo is read-only to protect the AI quota: browse the evidence, before/after pairs, reports and provenance, or run it on your own machine as below. To fit the free plan's memory, search on the server matches notes, AI tags and captions; image search with CLIP runs on the field devices.
+**Live demo (Saakshi Impact): https://saakshi-impact.onrender.com** (free plan: the first visit after a quiet spell takes about a minute to wake up). It shows the sample evidence: 17 photos from two devices, their integrity checks, the reused photo that was flagged, a before/after pair with the AI Vision description of the change, campaign images with faces blurred, the project map and a donor report. It is read-only to protect the AI quota; to capture, sync and upload, run it on your own machine as below. To fit the free plan's memory, search on the server matches notes, AI tags and captions; image search with CLIP runs on the field devices.
 
 **One command** (Docker): Qdrant in cluster mode, the cloud app, and two field devices.
 
@@ -151,9 +155,9 @@ Deploying for real (Qdrant Cloud + Render + Cloudinary, laptops, Raspberry Pi fi
 ## Tests and benchmarks
 
 ```bash
-pytest                                                         # 76 tests, no network needed
+pytest                                                         # 78 tests, no network needed
 QDRANT_TEST_URL=http://127.0.0.1:6333 \
-QDRANT_CLUSTER_TEST_URL=http://127.0.0.1:6433 pytest           # 89: + end-to-end sync against real Qdrant servers
+QDRANT_CLUSTER_TEST_URL=http://127.0.0.1:6433 pytest           # 91: + end-to-end sync against real Qdrant servers
 # against Qdrant Cloud: set both URLs to the cluster and QDRANT_TEST_API_KEY to its key
 ruff check .                                                   # lint rules in ruff.toml
 python -m bench.run_all --server http://127.0.0.1:6333 --cluster http://127.0.0.1:6433
@@ -190,12 +194,12 @@ docs/                  WHY, PS03 deep dive, benchmarks, comparison, deploy, setu
 
 ## Team
 
-| Name | Role | Links |
+| Name | Role | GitHub |
 |---|---|---|
-| Sudip Manna | Team leader; cloud platform: Cloudinary pipeline and Impact backend (PS02) | [GitHub](https://github.com/Sudip-005) · [LinkedIn](https://linkedin.com/in/...) |
-| Rishi Ghosal | Architect and lead developer: edge memory, sync engine, benchmarks and system integration | [GitHub](https://github.com/rishighosal) · [LinkedIn](https://linkedin.com/in/...) |
-| Agnibha Kundu | Frontend & UX: both UIs, tour, PWA, screenshots | [GitHub](https://github.com/Agnibhakundu350) · [LinkedIn](https://linkedin.com/in/...) |
-| Subhankar Nandi | DevOps, testing & docs | [GitHub](https://github.com/Subhankarnandi777) · [LinkedIn](https://linkedin.com/in/...) |
+| Sudip Manna | Team leader; cloud platform: Cloudinary pipeline and Impact backend (PS02) | [@Sudip-005](https://github.com/Sudip-005) |
+| Rishi Ghosal | Architect and lead developer: edge memory, sync engine, benchmarks and system integration | [@rishighosal](https://github.com/rishighosal) |
+| Agnibha Kundu | Frontend & UX: both UIs, tour, PWA, screenshots | [@Agnibhakundu350](https://github.com/Agnibhakundu350) |
+| Subhankar Nandi | DevOps, testing & docs | [@Subhankarnandi777](https://github.com/Subhankarnandi777) |
 
 Built for **Code Cubicle 6.0** (Geek Room).
 
