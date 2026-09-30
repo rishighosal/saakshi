@@ -1,0 +1,82 @@
+# The whole system on one machine: Qdrant (cluster mode, for regional shards),
+# the Impact cloud app, and two simulated field devices.
+#
+#   cp .env.example .env        # add CLOUDINARY_URL (optional: works without it)
+#   docker compose up --build
+#   open http://localhost:8000  (Impact)   http://localhost:8101  (Officer A)   http://localhost:8102  (Officer B)
+#
+# In a real deployment only qdrant + impact run in the cloud; the field app
+# runs on each officer's laptop or on a field kit (see docs/DEPLOY.md).
+
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.19.1
+    # Cluster mode on a single node: enables custom sharding, one shard per project region
+    command: ["./qdrant", "--uri", "http://qdrant:6335"]
+    environment:
+      QDRANT__CLUSTER__ENABLED: "true"
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant-data:/qdrant/storage
+    restart: unless-stopped
+
+  impact:
+    build: .
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      QDRANT_URL: http://qdrant:6333
+      IMPACT_HOST: 0.0.0.0
+      PORT: "8000"
+      INGEST_TOKEN: ${INGEST_TOKEN:-demo-token-change-me}
+      PUBLIC_BASE_URL: http://localhost:8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - qdrant
+    volumes:
+      - impact-data:/app/data
+    restart: unless-stopped
+
+  field-a:
+    build:
+      context: .
+      dockerfile: Dockerfile.field
+    environment:
+      DEVICE_ID: dev-a
+      DEVICE_NAME: Officer Rina (Kolkata)
+      QDRANT_URL: http://qdrant:6333
+      IMPACT_URL: http://impact:8000
+      INGEST_TOKEN: ${INGEST_TOKEN:-demo-token-change-me}
+    ports:
+      - "8101:8101"
+    depends_on:
+      - impact
+    volumes:
+      - field-a-data:/app/data
+
+  field-b:
+    build:
+      context: .
+      dockerfile: Dockerfile.field
+    environment:
+      DEVICE_ID: dev-b
+      DEVICE_NAME: Officer Arjun (Sundarbans)
+      QDRANT_URL: http://qdrant:6333
+      IMPACT_URL: http://impact:8000
+      INGEST_TOKEN: ${INGEST_TOKEN:-demo-token-change-me}
+      MEDIA_BUDGET_MB: "512"
+    ports:
+      - "8102:8101"
+    depends_on:
+      - impact
+    volumes:
+      - field-b-data:/app/data
+
+volumes:
+  qdrant-data:
+  impact-data:
+  field-a-data:
+  field-b-data:

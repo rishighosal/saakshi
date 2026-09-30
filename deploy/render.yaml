@@ -1,0 +1,18 @@
+# Render blueprint for the cloud side (Impact). Qdrant: use a free Qdrant Cloud cluster.
+services:
+  - type: web
+    name: saakshi-impact
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: CLOUDINARY_URL
+        sync: false
+      - key: QDRANT_URL
+        sync: false
+      - key: QDRANT_API_KEY
+        sync: false
+      - key: INGEST_TOKEN
+        generateValue: true
+      - key: IMPACT_HOST
+        value: 0.0.0.0

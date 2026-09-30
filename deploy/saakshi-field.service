@@ -1,0 +1,21 @@
+# systemd unit for a field kit (Raspberry Pi 4/5 with 64-bit Raspberry Pi OS, or any Linux laptop).
+#   sudo cp deploy/saakshi-field.service /etc/systemd/system/
+#   sudo systemctl daemon-reload && sudo systemctl enable --now saakshi-field
+# Officers' phones join the kit's Wi-Fi hotspot and open http://<kit-ip>:8101 (installable as an app).
+[Unit]
+Description=Saakshi Field device app (offline-first evidence memory on Qdrant Edge)
+After=network.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/saakshi
+EnvironmentFile=-/home/pi/saakshi/.env
+Environment=FIELD_HOST=0.0.0.0
+Environment=FIELD_PORT=8101
+ExecStart=/home/pi/saakshi/.venv/bin/python -m field
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

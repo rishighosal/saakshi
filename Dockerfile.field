@@ -1,0 +1,22 @@
+# Saakshi Field (the device app) in a container: for demos, kiosks and field kits
+# (x86_64 or 64-bit ARM such as a Raspberry Pi 4/5 on Raspberry Pi OS Bookworm).
+FROM python:3.11-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 \
+    SAAKSHI_MODEL_DIR=/app/models SAAKSHI_DATA_DIR=/app/data \
+    FIELD_HOST=0.0.0.0 FIELD_PORT=8101
+
+RUN apt-get update && apt-get install -y --no-install-recommends libgl1 libglib2.0-0 && rm -rf /var/lib/apt/lists/*
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY saakshi_core ./saakshi_core
+COPY field ./field
+COPY bench ./bench
+COPY scripts ./scripts
+COPY docs/benchmarks ./docs/benchmarks
+# CLIP weights baked in so the device never needs the internet for search
+RUN python scripts/download_models.py || echo "CLIP download skipped; the device falls back to colour + keyword search"
+
+EXPOSE 8101
+CMD ["sh", "-c", "python -m field --host ${FIELD_HOST} --port ${FIELD_PORT}"]
