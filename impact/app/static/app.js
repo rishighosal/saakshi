@@ -68,15 +68,15 @@
   // A public deployment is read-only: visitors see every result, but nothing that writes
   // (and could spend the AI Vision quota). Controls that write carry data-write.
   function demoLinks(demo) {
-    const video = demo.video_url ? `<a href="${esc(demo.video_url)}" target="_blank" rel="noopener">Watch the video</a>` : "Watch the video";
+    const video = demo.video_url ? `<a href="${esc(demo.video_url)}" target="_blank" rel="noopener">watch the video</a>, or ` : "";
     const repo = demo.repo_url ? `<a href="${esc(demo.repo_url)}#run-it" target="_blank" rel="noopener">run it on your own machine</a>` : "run it on your own machine";
-    return `${video}, or ${repo}.`;
+    return `To try uploads, ${video}${repo}.`;
   }
   function showDemoNote(demo) {
     document.body.classList.toggle("ro", Boolean(demo));
     const n = $("#demo-note");
     if (!demo) { n.hidden = true; return; }
-    n.innerHTML = `<b>This public demo is read-only to protect the AI quota.</b> ${demoLinks(demo)}`;
+    n.innerHTML = `This public demo is read-only to protect the AI quota. ${demoLinks(demo)}`;
     n.hidden = false;
   }
   const readOnly = () => Boolean(S.status && S.status.public_demo);
@@ -112,7 +112,7 @@
     const prob = a.integrity_level !== "verified" ? firstProblem(a) : null;
     const tags = (a.ai_tags || []).slice(0, 3).map((t) => `<span class="tag ai">${esc(lbl(t))}</span>`).join("");
     return `<a class="ev" href="#/a/${esc(a.id)}">
-      <div class="img" style="background-image:url('${esc(a.thumb_url)}')">
+      <div class="img" style="background-image:url('${esc(pub(a))}')">
         <span class="lv">${levelPill(a)}</span>
         ${a.source === "field" ? `<span class="pill dark src" title="Synced from a field device">${esc(a.device_name || "Field device")}</span>` : ""}
         ${a.media_type === "video" ? `<span class="pill dark vid">▶ Video${a.duration ? ` · ${Math.round(a.duration)} s` : ""}</span>` : ""}
@@ -126,29 +126,136 @@
   }
 
   // ---------------------------------------------------------------- overview
+  const ICON = {
+    check: '<path d="M20 6 9 17l-5-5"/>',
+    pin: '<path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+    folder: '<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',
+    copy: '<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/>',
+    face: '<circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01M8.5 15c1 1 2.2 1.5 3.5 1.5s2.5-.5 3.5-1.5"/><path d="M4 4l16 16"/>',
+    tag: '<path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9z"/><circle cx="7.5" cy="7.5" r="1.5"/>',
+    phone: '<rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/><path d="M3 9l2 2M21 9l-2 2"/>',
+    sync: '<path d="M4 12a8 8 0 0 1 14-5.3L20 9"/><path d="M20 4v5h-5"/><path d="M20 12a8 8 0 0 1-14 5.3L4 15"/><path d="M4 20v-5h5"/>',
+    shield: '<path d="M12 3 4 6v6c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/>',
+    report: '<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/>',
+  };
+  const icon = (k) => `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICON[k]}</svg>`;
+  const reduced = () => Boolean(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  function countUp(root) {
+    $$("[data-count]", root).forEach((el) => {
+      const n = Number(el.dataset.count);
+      if (reduced() || !n) { el.textContent = n; return; }
+      const t0 = performance.now();
+      const step = (t) => { const k = Math.min(1, (t - t0) / 900); el.textContent = Math.round(n * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); };
+      requestAnimationFrame(step);
+    });
+  }
+  // Public pages show the face-blurred rendition
+  const pub = (a) => (readOnly() ? a.public_thumb_url : a.thumb_url) || a.thumb_url;
+  function galleryCard(a) {
+    const tags = (a.ai_tags || []).slice(0, 3).map((t) => `<span class="tag ai">${esc(lbl(t))}</span>`).join("");
+    return `<button type="button" class="gcard" data-lightbox="${esc(a.id)}">
+      <span class="ph skel"><img src="${esc(pub(a))}" alt="${esc(a.caption || a.note || "Field photo")}" loading="lazy"><span class="lv">${levelPill(a)}</span></span>
+      <span class="b"><span class="title">${esc(a.note || a.caption || "Field photo")}</span>
+        <span class="meta">${esc(a.site_name || "No location")} · ${esc(day(a.captured_at || a.uploaded_at))}</span>
+        ${tags ? `<span class="tags">${tags}</span>` : ""}</span></button>`;
+  }
+  function lightbox(a) {
+    const checks = ((a.integrity && a.integrity.checks) || []).filter((c) => c.status !== "pass").slice(0, 3);
+    $("#modal-content").innerHTML = `<figure class="lightbox">
+      <img src="${esc((readOnly() ? a.public_display_url : a.display_url) || pub(a))}" alt="${esc(a.caption || a.note || "Field photo")}">
+      <figcaption><div class="row">${levelPill(a)}<span class="muted">${esc(a.project_name || "")} · ${esc(a.site_name || "No location")} · ${esc(day(a.captured_at))}</span></div>
+        <h2 id="m-title">${esc(a.note || "Field photo")}</h2>
+        ${a.caption ? `<p class="muted"><b>AI Vision caption:</b> ${esc(a.caption)}</p>` : ""}
+        ${checks.length ? `<ul class="checks-mini">${checks.map((c) => `<li class="${esc(c.status)}">${esc(c.message)}</li>`).join("")}</ul>` : ""}
+        <a class="btn small primary" href="#/a/${esc(a.id)}">All checks and provenance</a></figcaption></figure>`;
+    $("#modal").hidden = false;
+  }
+  function howItWorks() {
+    const steps = [
+      ["phone", "Capture offline", "Each photo is stored and searchable on the officer's device in Qdrant Edge, with no network."],
+      ["sync", "Sync what matters", "Urgent reports go first, faces are blurred on the device, repeat shots are linked instead of re-sent."],
+      ["shield", "Verify in the cloud", "Cloudinary AI Vision tags and captions each photo; every one is checked for reuse, place, date and edits."],
+      ["report", "Report to funders", "Before/after pairs, campaign images and a donor report, each photo traceable to its original."],
+    ];
+    return `<section class="section how"><h2>How it works</h2><ol class="steps4">${steps.map(([i, t, d], n) =>
+      `<li><span class="ic">${icon(i)}</span><span class="n">${n + 1}</span><b>${esc(t)}</b><span>${esc(d)}</span></li>`).join("")}</ol></section>`;
+  }
+  function overviewMap(projects, assets) {
+    const el = $("#omap");
+    if (!el) return;
+    if (!window.L) { el.innerHTML = `<div class="empty">The map could not load.</div>`; return; }
+    if (S.omap) { S.omap.remove(); S.omap = null; }
+    const m = L.map(el, { scrollWheelZoom: false });
+    S.omap = m;
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: "© OpenStreetMap contributors" }).addTo(m);
+    const colors = { verified: "#1E7A4C", review: "#C58B1B", flagged: "#A83232" };
+    let bounds = null;
+    projects.forEach((p) => {
+      L.circle([p.lat, p.lon], { radius: p.radius_m, color: "#1E6A50", weight: 1.5, fillOpacity: 0.06 }).addTo(m)
+        .bindPopup(`<b>${esc(p.name)}</b><br>${esc(p.evidence)} photos · ${esc(p.verified)} verified<br><a href="#/p/${esc(p.id)}">Open project</a>`);
+      const area = L.latLng(p.lat, p.lon).toBounds(p.radius_m * 2);
+      bounds = bounds ? bounds.extend(area) : area;
+    });
+    assets.filter((a) => a.lat != null).forEach((a) => {
+      L.circleMarker([a.lat, a.lon], { radius: 7, color: "#fff", weight: 2, fillColor: colors[a.integrity_level] || "#555", fillOpacity: 0.95 })
+        .addTo(m).bindPopup(`<a href="#/a/${esc(a.id)}"><img src="${esc(pub(a))}" alt=""></a><b>${esc(a.site_name || "")}</b><br>${esc(LEVEL[a.integrity_level] || "")} · ${esc(day(a.captured_at))}`);
+    });
+    if (bounds) m.fitBounds(bounds.pad(0.1)); else m.setView([22.5, 88.4], 9);
+  }
+
   async function overview() {
-    const d = await api("/api/overview");
+    const slow = setTimeout(() => {
+      view.innerHTML = `<div class="waking"><span class="spinner" aria-hidden="true"></span><div><b>Waking up the server…</b><div class="muted">This free demo sleeps when nobody is using it. It takes up to a minute to start, then it is quick.</div></div></div>`;
+    }, 2500);
+    let d, list;
+    try {
+      [d, list] = await Promise.all([api("/api/overview"), api("/api/assets?limit=200")]);
+    } finally { clearTimeout(slow); }
+    const assets = list.items || list.assets || [];
     const t = d.totals;
     const st = d.status;
+    const withPairs = d.projects.filter((p) => p.pairs);
+    const details = await Promise.all(withPairs.map((p) => api(`/api/projects/${encodeURIComponent(p.id)}`).catch(() => null)));
+    const pairs = details.filter(Boolean).flatMap((x) => x.pairs || []).filter((x) => x.before && x.after);
+    const pair = pairs.find((x) => x.change_text) || pairs[0];
+    const sites = new Set(assets.map((a) => a.site_id).filter(Boolean)).size;
+    const reuse = assets.filter((a) => ((a.integrity && a.integrity.checks) || []).some((c) => c.key === "reuse" && c.status === "fail")).length;
+    const faces = assets.filter((a) => a.faces && !a.consent).length;
+    const tagged = assets.filter((a) => (a.ai_tags || []).length).length;
+    const reportTo = (pair && pair.project_id) || (d.projects[0] && d.projects[0].id);
+    const kpi = (ic, n, k, sub, cls = "") => `<div class="kpi2 ${cls}"><span class="ic">${icon(ic)}</span><div><div class="v" data-count="${n}">${n}</div><div class="k">${esc(k)}</div>${sub ? `<div class="sub">${esc(sub)}</div>` : ""}</div></div>`;
     view.innerHTML = `
-      <div class="page-head"><div>
-        <div class="eyebrow">${esc(d.org)}</div>
-        <h1>Field evidence you can stand behind</h1>
-        <p>Every photo from the field is placed on a project and site, understood by Cloudinary AI Vision, checked for reuse and tampering, and traceable back to its original.</p>
-      </div></div>
-      <div class="kpis">
-        <div class="kpi"><div class="k">Evidence</div><div class="v">${t.evidence}</div></div>
-        <div class="kpi ok"><div class="k">Verified</div><div class="v">${t.verified}</div></div>
-        <div class="kpi ${t.review ? "warn" : ""}"><div class="k">Needs review</div><div class="v">${t.review}</div></div>
-        <div class="kpi ${t.flagged ? "bad" : ""}"><div class="k">Flagged</div><div class="v">${t.flagged}</div></div>
-        <div class="kpi"><div class="k">Synced from field devices</div><div class="v">${t.from_field}</div></div>
-        <div class="kpi"><div class="k">Devices</div><div class="v">${t.devices}</div></div>
+      <section class="hero">
+        <div class="eyebrow light">${esc(d.org)}</div>
+        <h1>Verified field evidence, from a phone with no signal to a funder's report</h1>
+        <p>Field teams capture and search photos offline. The office sees every photo checked by AI for place, date, reuse and edits, paired before and after, and ready for donors.</p>
+        <div class="row hero-cta">
+          <a class="btn gold" href="#gallery">Explore evidence</a>
+          ${pair ? `<a class="btn ghost" href="#beforeafter">See before/after</a>` : ""}
+          ${reportTo ? `<a class="btn ghost" href="#/report/${esc(reportTo)}">Donor report</a>` : ""}
+        </div>
+        <div class="badges"><span>Built on Qdrant Edge</span><span>Cloudinary AI Vision</span><span>Sample photos from Wikimedia Commons</span></div>
+      </section>
+      <div class="kpis2">
+        ${kpi("check", t.verified, "Photos verified", `of ${t.evidence} photos`, "ok")}
+        ${kpi("pin", sites, "Sites", "placed from GPS")}
+        ${kpi("folder", d.projects.length, "Projects")}
+        ${kpi("copy", reuse, "Reuse flagged", "same photo, another project", reuse ? "bad" : "")}
+        ${kpi("face", faces, "Faces blurred", "photos with people, in public images")}
+        ${kpi("tag", tagged, "AI-tagged", "by Cloudinary AI Vision")}
       </div>
-      <section class="section"><div class="section-head"><h2>Projects</h2><button class="btn" id="newp" data-write>New project</button></div>
-        <div class="projects">${d.projects.map(projectCard).join("")}</div></section>
+      ${pair ? `<section class="section" id="beforeafter"><div class="section-head"><h2>Before and after</h2><span class="muted">Drag the handle to compare</span></div>
+        <div class="feature-pair">${pairCard(pair)}</div></section>` : ""}
+      ${howItWorks()}
+      <section class="section"><div class="section-head"><h2>Projects and sites</h2><button class="btn" id="newp" data-write>New project</button></div>
+        <div class="map-row"><div class="omap" id="omap" role="region" aria-label="Map of project areas and photo locations"></div>
+        <div class="projects stack">${d.projects.map(projectCard).join("")}</div></div>
+        <div class="legend"><span class="dot verified"></span>Verified <span class="dot review"></span>Needs review <span class="dot flagged"></span>Flagged</div></section>
+      <section class="section" id="gallery"><div class="section-head"><h2>Evidence</h2><a href="#/search">Search all evidence</a></div>
+        <div class="gallery">${assets.map(galleryCard).join("") || `<div class="empty">No evidence yet.</div>`}</div></section>
       <section class="section cols">
         <div class="panel"><h2>Flagged for review</h2>
-          ${d.flagged.length ? `<div class="list">${d.flagged.map((a) => { const p = firstProblem(a); return `<a class="it" href="#/a/${esc(a.id)}"><img src="${esc(a.thumb_url)}" alt=""><div><div class="row">${levelPill(a)}<span class="muted">${esc(a.project_name || "")}</span></div><div>${esc(p ? p.message : "")}</div></div></a>`; }).join("")}</div>`
+          ${d.flagged.length ? `<div class="list">${d.flagged.map((a) => { const p = firstProblem(a); return `<a class="it" href="#/a/${esc(a.id)}"><img src="${esc(pub(a))}" alt=""><div><div class="row">${levelPill(a)}<span class="muted">${esc(a.project_name || "")}</span></div><div>${esc(p ? p.message : "")}</div></div></a>`; }).join("")}</div>`
           : `<p class="muted">Nothing flagged. Reused photos, pictures taken outside a project's area or dates, and edited files appear here.</p>`}
         </div>
         <div class="panel"><h2>Activity</h2>
@@ -156,13 +263,25 @@
           <h3 style="margin-top:18px">System</h3>
           <dl class="status-list">
             <dt>Media store</dt><dd>${st.store === "cloudinary" ? `Cloudinary · ${esc(st.cloud_name)}` : "Local files (dev mode)"}</dd>
-            <dt>AI Vision</dt><dd>${st.ai_vision && !st.ai_vision_error ? "On" : "Off"}${st.ai_vision_quota && st.ai_vision_quota.remaining != null ? ` · ${esc(st.ai_vision_quota.remaining)} left` : ""}</dd>
+            <dt>AI Vision</dt><dd>${st.ai_vision && !st.ai_vision_error ? "On" : "Off here; results kept from earlier runs"}</dd>
             <dt>Vector index</dt><dd>${st.index === "qdrant" ? "Qdrant (shared with devices)" : "Local"}</dd>
-            <dt>Embeddings</dt><dd>${esc(st.embedder.mode === "clip" ? "CLIP ViT-B/32" : "Fallback")}</dd>
+            <dt>Search on this server</dt><dd>${esc(st.embedder.mode === "clip" ? "CLIP ViT-B/32 and keywords" : "Keywords, AI tags and captions")}</dd>
           </dl>
         </div>
       </section>`;
+    countUp(view);
+    bindPairs(view);
+    $$(".gcard img", view).forEach((img) => {
+      const done = () => img.parentNode.classList.remove("skel");
+      if (img.complete) done(); else { img.addEventListener("load", done); img.addEventListener("error", done); }
+    });
+    const byId = Object.fromEntries(assets.map((a) => [a.id, a]));
+    $$("[data-lightbox]", view).forEach((b) => b.addEventListener("click", () => lightbox(byId[b.dataset.lightbox])));
+    $$('a[href="#gallery"], a[href="#beforeafter"]', view).forEach((a) => a.addEventListener("click", (e) => {
+      e.preventDefault(); $(a.getAttribute("href")).scrollIntoView({ behavior: reduced() ? "auto" : "smooth" });
+    }));
     $("#newp").addEventListener("click", projectModal);
+    overviewMap(d.projects, assets);
   }
 
   function projectModal() {
