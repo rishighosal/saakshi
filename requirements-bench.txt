@@ -1,0 +1,2 @@
+# Extra for the benchmark charts (python -m bench.report); the apps do not need it
+matplotlib>=3.8
