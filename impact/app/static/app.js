@@ -442,6 +442,8 @@
   function pairCard(x) {
     if (!x.before || !x.after) return "";
     (S.pairs = S.pairs || {})[x.id] = x;
+    const gap = Math.round(Number(x.gap_days) || 0);
+    const aiSaysMore = Boolean(x.change_text) && x.verdict === "unclear";  // the tags saw no change; the AI description did
     const composite = x.composite_url ? `<details><summary>Cloudinary composite and how it was made</summary>
         <a href="${esc(x.composite_url)}" target="_blank" rel="noopener"><img src="${esc(x.composite_url)}" alt="Before and after side by side" style="width:100%;border-radius:8px;margin-top:8px"></a>
         <ol class="steps">${x.composite_steps.map((s) => `<li>${esc(s)}</li>`).join("")}</ol></details>` : "";
@@ -454,9 +456,9 @@
         <input type="range" min="0" max="100" value="50" aria-label="Slide to compare before and after">
       </div>
       <div class="body">
-        <div class="row"><strong>${esc(x.site_name)}</strong><span class="pill ${esc(x.verdict)}">${esc(cap(x.verdict))}</span>
-          <span class="muted mono">${x.gap_days} days apart${x.similarity != null ? ` · view match ${Math.round(x.similarity * 100)}%` : ""}${x.manual ? " · picked by hand" : ""}</span></div>
-        <div>${esc(x.summary)}</div>
+        <div class="row"><strong>${esc(x.site_name)}</strong>${aiSaysMore ? `<span class="pill changed">See AI Vision</span>` : `<span class="pill ${esc(x.verdict)}">${esc(cap(x.verdict))}</span>`}
+          <span class="muted mono">${gap} ${gap === 1 ? "day" : "days"} apart${x.similarity != null ? ` · view match ${Math.round(x.similarity * 100)}%` : ""}${x.manual ? " · picked by hand" : ""}</span></div>
+        <div>${x.change_text ? "The tag check alone can't tell what changed, so AI Vision compared the two photos:" : esc(x.summary)}</div>
         ${x.change_text ? `<div class="change"><b>AI Vision:</b> ${esc(x.change_text)}</div>` : `<div data-write><button class="btn small" data-describe="${x.id}">Describe the change with AI Vision</button></div>`}
         ${composite}
         <div class="row">${readOnly()
