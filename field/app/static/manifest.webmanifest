@@ -1,0 +1,10 @@
+{
+  "name": "Saakshi Field",
+  "short_name": "Saakshi",
+  "description": "Offline-first evidence capture and search for NGO field teams, on Qdrant Edge.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F3F4F0",
+  "theme_color": "#0E3B2E",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}
