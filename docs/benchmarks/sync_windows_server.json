@@ -1,0 +1,109 @@
+{
+  "machine": {
+    "python": "3.12.10",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 140 Stepping 2, GenuineIntel",
+    "cpus": 8,
+    "date": "2026-09-29 23:42"
+  },
+  "per_project": 2000,
+  "new_points_per_project": 50,
+  "global": {
+    "layout": "global",
+    "projects": 5,
+    "points_per_project": 2000,
+    "optimizer_settle_s": 0.5,
+    "first_pull": {
+      "status": 200,
+      "bytes": 761946112,
+      "ms": 6547.369400001116,
+      "load_ms": 2262.9004000009445,
+      "points": 10000
+    },
+    "no_change": {
+      "status": 304,
+      "bytes": 0,
+      "ms": 322.6856000001135
+    },
+    "one_point": {
+      "delta": {
+        "bytes": 3153,
+        "points": 1,
+        "ms": 297.6257999998779,
+        "bytes_per_point": 3153.0
+      },
+      "partial": {
+        "status": 200,
+        "bytes": 215709184,
+        "ms": 2389.757400000235
+      }
+    },
+    "incremental_delta": {
+      "bytes": 721814,
+      "points": 250,
+      "ms": 635.4931999994733,
+      "bytes_per_point": 2887.256
+    },
+    "incremental_pull": {
+      "status": 200,
+      "bytes": 761990144,
+      "ms": 6829.236300000048,
+      "apply_ms": 3748.958100000891,
+      "points_after": 10251
+    },
+    "naive_repull": {
+      "status": 200,
+      "bytes": 761953280,
+      "ms": 6288.363699999536
+    }
+  },
+  "regional": {
+    "layout": "regional",
+    "projects": 5,
+    "points_per_project": 2000,
+    "optimizer_settle_s": 1.6,
+    "first_pull": {
+      "status": 200,
+      "bytes": 467958784,
+      "ms": 4045.3450000004523,
+      "load_ms": 1574.7326000000612,
+      "points": 2000
+    },
+    "no_change": {
+      "status": 304,
+      "bytes": 0,
+      "ms": 322.0672999996168
+    },
+    "one_point": {
+      "delta": {
+        "bytes": 3171,
+        "points": 1,
+        "ms": 298.6423000002105,
+        "bytes_per_point": 3171.0
+      },
+      "partial": {
+        "status": 200,
+        "bytes": 215629312,
+        "ms": 2205.69500000056
+      }
+    },
+    "incremental_delta": {
+      "bytes": 144531,
+      "points": 50,
+      "ms": 368.4627000002365,
+      "bytes_per_point": 2890.62
+    },
+    "incremental_pull": {
+      "status": 200,
+      "bytes": 215630336,
+      "ms": 2511.9251999985863,
+      "apply_ms": 1427.3599999996804,
+      "points_after": 2051
+    },
+    "naive_repull": {
+      "status": 200,
+      "bytes": 501516800,
+      "ms": 4725.127300000167
+    }
+  }
+}

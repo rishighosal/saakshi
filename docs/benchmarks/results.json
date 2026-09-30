@@ -1,0 +1,756 @@
+{
+  "generated": "2026-09-30 08:53",
+  "available": true,
+  "headlines": [
+    {
+      "label": "Search 100,000 photos on the device",
+      "value": "1.2 ms",
+      "detail": "p50, recall@10 0.98; NumPy brute force 6.3 ms; Qdrant server over localhost HTTP 30.7 ms before any real network"
+    },
+    {
+      "label": "Stay in sync after 1 new photo in the region",
+      "value": "3 KB",
+      "detail": "delta pull; partial snapshot 7.3 MB; full region snapshot 7.2 MB; nothing new: HTTP 200, 7.1 MB (this server re-sends the region)"
+    },
+    {
+      "label": "First download for a device that serves one region",
+      "value": "7.2 MB",
+      "detail": "its region's shard only, instead of 29.4 MB for the whole collection (5 regions)"
+    },
+    {
+      "label": "Remote islands: team searches answered",
+      "value": "100%",
+      "detail": "cloud app 37%; the team's evidence found 71% vs 29%"
+    },
+    {
+      "label": "Remote islands: data pushed through 2G per team-day",
+      "value": "67 MB",
+      "detail": "cloud app 434 MB; urgent photo at HQ p90 110 min vs 189 min"
+    },
+    {
+      "label": "Faces uploaded without blur, per team-day",
+      "value": "0",
+      "detail": "cloud app 37; repeat shots uploaded 0 vs 44"
+    }
+  ],
+  "charts": [
+    "search_latency.png",
+    "recall_ef.png",
+    "sync_bytes.png",
+    "fieldday_recall.png",
+    "fieldday_answered.png",
+    "fieldday_slow_mb.png",
+    "fieldday_urgent.png"
+  ],
+  "search": {
+    "machine": {
+      "python": "3.12.10",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel64 Family 6 Model 140 Stepping 2, GenuineIntel",
+      "cpus": 8,
+      "date": "2026-09-29 23:46"
+    },
+    "dim": 512,
+    "queries": 200,
+    "sizes": [
+      {
+        "n": 1000,
+        "edge_build_s": 0.1,
+        "edge": {
+          "p50_ms": 0.10259999999107094,
+          "p95_ms": 0.15155000037339048,
+          "recall_at_10": 1.0,
+          "hybrid_p50_ms": 0.18105000071955146,
+          "hybrid_p95_ms": 0.20796000053451277
+        },
+        "edge_disk_mb": 5.4,
+        "edge_qdrant_defaults_build_s": 0.09,
+        "edge_qdrant_defaults": {
+          "p50_ms": 0.11720000020432053,
+          "p95_ms": 0.15558999984932595,
+          "recall_at_10": 1.0,
+          "hybrid_p50_ms": 0.18799999998009298,
+          "hybrid_p95_ms": 0.20075500024177015
+        },
+        "edge_int8": {
+          "p50_ms": 0.1034500000969274,
+          "p95_ms": 0.13332999997146544,
+          "recall_at_10": 1.0,
+          "hybrid_p50_ms": 0.19390000034036348,
+          "hybrid_p95_ms": 0.2255699992019799
+        },
+        "edge_int8_disk_mb": 5.4,
+        "edge_unindexed": {
+          "p50_ms": 0.11655000071186805,
+          "p95_ms": 0.19780000075115808,
+          "recall_at_10": 1.0,
+          "hybrid_p50_ms": 0.1862500002971501,
+          "hybrid_p95_ms": 0.21729500085712058
+        },
+        "numpy": {
+          "p50_ms": 0.06975000087550143,
+          "p95_ms": 0.08022000129130902,
+          "recall_at_10": 1.0
+        },
+        "vectors_float32_mb": 2.0,
+        "vectors_int8_mb": 0.5,
+        "server_http": {
+          "p50_ms": 15.572149999570684,
+          "p95_ms": 16.77920000111044,
+          "recall_at_10": 1.0
+        },
+        "server_url_is_local": true
+      },
+      {
+        "n": 10000,
+        "edge_build_s": 2.84,
+        "edge": {
+          "p50_ms": 1.5524999998888234,
+          "p95_ms": 1.8773649995637243,
+          "recall_at_10": 1.0,
+          "hybrid_p50_ms": 1.6905499996937579,
+          "hybrid_p95_ms": 1.943595001193898
+        },
+        "edge_disk_mb": 52.0,
+        "edge_qdrant_defaults_build_s": 1.85,
+        "edge_qdrant_defaults": {
+          "p50_ms": 0.28110000039305305,
+          "p95_ms": 0.35617499943327857,
+          "recall_at_10": 0.968,
+          "hybrid_p50_ms": 0.4614000008587027,
+          "hybrid_p95_ms": 0.5819049998535775
+        },
+        "edge_int8": {
+          "p50_ms": 0.7183499992606812,
+          "p95_ms": 0.9702400016067259,
+          "recall_at_10": 0.9695,
+          "hybrid_p50_ms": 0.9429500005353475,
+          "hybrid_p95_ms": 1.1596949994782333
+        },
+        "edge_int8_disk_mb": 57.2,
+        "edge_unindexed": {
+          "p50_ms": 1.251800000318326,
+          "p95_ms": 1.3919349999923725,
+          "recall_at_10": 1.0,
+          "hybrid_p50_ms": 1.45169999996142,
+          "hybrid_p95_ms": 1.5390649988148652
+        },
+        "numpy": {
+          "p50_ms": 0.5160000000614673,
+          "p95_ms": 0.643145000685763,
+          "recall_at_10": 1.0
+        },
+        "vectors_float32_mb": 20.5,
+        "vectors_int8_mb": 5.1,
+        "server_http": {
+          "p50_ms": 15.521049999733805,
+          "p95_ms": 26.748744999258633,
+          "recall_at_10": 1.0
+        },
+        "server_url_is_local": true
+      },
+      {
+        "n": 50000,
+        "edge_build_s": 23.11,
+        "edge": {
+          "p50_ms": 1.6589999995630933,
+          "p95_ms": 1.9866199997522922,
+          "recall_at_10": 0.995,
+          "hybrid_p50_ms": 2.3981000003914232,
+          "hybrid_p95_ms": 3.8203850009267626
+        },
+        "edge_disk_mb": 258.7,
+        "edge_qdrant_defaults_build_s": 14.32,
+        "edge_qdrant_defaults": {
+          "p50_ms": 0.31225000020640437,
+          "p95_ms": 0.5370350007979139,
+          "recall_at_10": 0.6395,
+          "hybrid_p50_ms": 0.9020999996209866,
+          "hybrid_p95_ms": 1.1808750007730848
+        },
+        "edge_int8": {
+          "p50_ms": 1.084249998712039,
+          "p95_ms": 1.5376299995295994,
+          "recall_at_10": 0.936,
+          "hybrid_p50_ms": 1.9358500003363588,
+          "hybrid_p95_ms": 2.364050000869611
+        },
+        "edge_int8_disk_mb": 284.5,
+        "edge_unindexed": {
+          "p50_ms": 5.4710499998691375,
+          "p95_ms": 6.6372100002809,
+          "recall_at_10": 1.0,
+          "hybrid_p50_ms": 6.243799999538169,
+          "hybrid_p95_ms": 7.241824999800883
+        },
+        "numpy": {
+          "p50_ms": 3.0527000008078176,
+          "p95_ms": 3.8167149987202706,
+          "recall_at_10": 1.0
+        },
+        "vectors_float32_mb": 102.4,
+        "vectors_int8_mb": 25.6,
+        "server_http": {
+          "p50_ms": 30.722150000656256,
+          "p95_ms": 32.06346999941161,
+          "recall_at_10": 1.0
+        },
+        "server_url_is_local": true
+      },
+      {
+        "n": 100000,
+        "edge_build_s": 56.49,
+        "edge": {
+          "p50_ms": 1.2263499993423466,
+          "p95_ms": 1.6677600013281328,
+          "recall_at_10": 0.985,
+          "hybrid_p50_ms": 2.2316999993563513,
+          "hybrid_p95_ms": 2.597464999325893
+        },
+        "edge_disk_mb": 517.1,
+        "edge_qdrant_defaults_build_s": 30.75,
+        "edge_qdrant_defaults": {
+          "p50_ms": 0.2703000000110478,
+          "p95_ms": 0.5191150003156507,
+          "recall_at_10": 0.5955,
+          "hybrid_p50_ms": 0.9890999990602722,
+          "hybrid_p95_ms": 1.2498100008997426
+        },
+        "edge_int8": {
+          "p50_ms": 0.8582500004195026,
+          "p95_ms": 1.1047550006878737,
+          "recall_at_10": 0.8915,
+          "hybrid_p50_ms": 1.8080499994539423,
+          "hybrid_p95_ms": 2.141155000026629
+        },
+        "edge_int8_disk_mb": 568.6,
+        "edge_unindexed": {
+          "p50_ms": 12.160299999777635,
+          "p95_ms": 18.579295000836282,
+          "recall_at_10": 1.0,
+          "hybrid_p50_ms": 13.428149999526795,
+          "hybrid_p95_ms": 19.97624500017991
+        },
+        "numpy": {
+          "p50_ms": 6.299050000052375,
+          "p95_ms": 8.114954998654866,
+          "recall_at_10": 1.0
+        },
+        "vectors_float32_mb": 204.8,
+        "vectors_int8_mb": 51.2,
+        "server_http": {
+          "p50_ms": 30.704599999808124,
+          "p95_ms": 31.63436999930127,
+          "recall_at_10": 1.0
+        },
+        "server_url_is_local": true
+      }
+    ],
+    "hnsw": {
+      "m": 32,
+      "ef_construct": 256,
+      "search_ef": 512
+    },
+    "ef_sweep": {
+      "n": 100000,
+      "m": 32,
+      "ef_construct": 256,
+      "points": [
+        {
+          "ef": 64,
+          "p50_ms": 0.32079999982670415,
+          "p95_ms": 0.5401799999162904,
+          "recall_at_10": 0.724
+        },
+        {
+          "ef": 128,
+          "p50_ms": 0.42225000015605474,
+          "p95_ms": 0.7086849992447236,
+          "recall_at_10": 0.8475
+        },
+        {
+          "ef": 256,
+          "p50_ms": 0.5663999991156743,
+          "p95_ms": 1.0222099998827614,
+          "recall_at_10": 0.925
+        },
+        {
+          "ef": 512,
+          "p50_ms": 1.2114500004827278,
+          "p95_ms": 1.6846749997057484,
+          "recall_at_10": 0.985
+        },
+        {
+          "ef": 1024,
+          "p50_ms": 2.2125000004962203,
+          "p95_ms": 2.737480000359937,
+          "recall_at_10": 0.995
+        }
+      ]
+    }
+  },
+  "sync": {
+    "machine": {
+      "python": "3.12.10",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel64 Family 6 Model 140 Stepping 2, GenuineIntel",
+      "cpus": 8,
+      "date": "2026-09-30 08:08"
+    },
+    "per_project": 2000,
+    "new_points_per_project": 50,
+    "server": {
+      "global": {
+        "kind": "Qdrant Cloud",
+        "version": "1.19.1",
+        "cluster_mode": "enabled"
+      },
+      "regional": {
+        "kind": "Qdrant Cloud",
+        "version": "1.19.1",
+        "cluster_mode": "enabled"
+      }
+    },
+    "global": {
+      "layout": "global",
+      "projects": 5,
+      "points_per_project": 2000,
+      "optimizer_settle_s": 26.1,
+      "first_pull": {
+        "status": 200,
+        "bytes": 29378048,
+        "ms": 8556.29119999503,
+        "load_ms": 578.5351000013179,
+        "points": 10000
+      },
+      "no_change": {
+        "status": 200,
+        "bytes": 29102080,
+        "ms": 11815.047699994466
+      },
+      "one_point": {
+        "delta": {
+          "bytes": 3154,
+          "points": 1,
+          "ms": 1294.8850999964634,
+          "bytes_per_point": 3154.0
+        },
+        "partial": {
+          "status": 200,
+          "bytes": 29280768,
+          "ms": 6257.7788999988115
+        }
+      },
+      "incremental_delta": {
+        "bytes": 721742,
+        "points": 250,
+        "ms": 5357.100100001844,
+        "bytes_per_point": 2886.968
+      },
+      "incremental_pull": {
+        "status": 200,
+        "bytes": 29893632,
+        "ms": 6387.940100001288,
+        "apply_ms": 1573.350999999093,
+        "points_after": 10251
+      },
+      "naive_repull": {
+        "status": 200,
+        "bytes": 30169088,
+        "ms": 6429.5253999953275
+      }
+    },
+    "regional": {
+      "layout": "regional",
+      "projects": 5,
+      "points_per_project": 2000,
+      "optimizer_settle_s": 2.7,
+      "first_pull": {
+        "status": 200,
+        "bytes": 7166976,
+        "ms": 10001.667099997576,
+        "load_ms": 571.2606000015512,
+        "points": 2000
+      },
+      "no_change": {
+        "status": 200,
+        "bytes": 7137792,
+        "ms": 4582.214399997611
+      },
+      "one_point": {
+        "delta": {
+          "bytes": 3171,
+          "points": 1,
+          "ms": 1186.801199997717,
+          "bytes_per_point": 3171.0
+        },
+        "partial": {
+          "status": 200,
+          "bytes": 7316480,
+          "ms": 4205.240399998729
+        }
+      },
+      "incremental_delta": {
+        "bytes": 144562,
+        "points": 50,
+        "ms": 2108.3594000010635,
+        "bytes_per_point": 2891.24
+      },
+      "incremental_pull": {
+        "status": 200,
+        "bytes": 7436288,
+        "ms": 5579.959900001995,
+        "apply_ms": 1723.2949000026565,
+        "points_after": 2051
+      },
+      "naive_repull": {
+        "status": 200,
+        "bytes": 7464960,
+        "ms": 4171.072199998889
+      }
+    }
+  },
+  "fieldday": {
+    "machine": {
+      "python": "3.12.10",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "processor": "Intel64 Family 6 Model 140 Stepping 2, GenuineIntel",
+      "cpus": 8,
+      "date": "2026-09-30 08:52"
+    },
+    "assumptions": {
+      "DEFER_BELOW_PRIORITY": 65,
+      "DEFER_MAX_WAIT_S": 2700,
+      "DELTA_MAX_POINTS": 100,
+      "RECONCILE_S": 900,
+      "DAY_MIN": 600,
+      "OFFICERS": 4,
+      "SITES": 8,
+      "PHOTOS_PER_VISIT": [
+        4,
+        9
+      ],
+      "VISIT_MIN": [
+        40,
+        90
+      ],
+      "TRAVEL_MIN": [
+        20,
+        60
+      ],
+      "P_BURST": 0.3,
+      "P_URGENT": 0.05,
+      "P_BAD_STATUS": 0.1,
+      "P_FACES": 0.2,
+      "P_CONSENT": 0.05,
+      "P_NO_GPS": 0.03,
+      "PHOTO_MB": [
+        2.0,
+        4.5
+      ],
+      "COMPRESSED_KB": [
+        220,
+        380
+      ],
+      "BLURRED_KB": [
+        380,
+        650
+      ],
+      "VECTOR_KB": 4.5,
+      "QUERY_RESPONSE_KB": 150,
+      "PULL_EVERY_MIN": 5,
+      "DELTA_KB_PER_POINT": 3.0,
+      "PARTIAL_KB": 434.0,
+      "QUERY_PATIENCE_S": 15,
+      "LINK_KBPS": {
+        "good": 250.0,
+        "slow": 24.0,
+        "offline": 0.0
+      },
+      "RTT_S": {
+        "good": 0.08,
+        "slow": 0.9
+      },
+      "SCENARIOS": {
+        "city": {
+          "mix": {
+            "good": 0.85,
+            "slow": 0.12,
+            "offline": 0.03
+          },
+          "dwell_min": 25,
+          "label": "City ward (Kolkata)"
+        },
+        "rural": {
+          "mix": {
+            "good": 0.35,
+            "slow": 0.4,
+            "offline": 0.25
+          },
+          "dwell_min": 18,
+          "label": "Rural block"
+        },
+        "remote": {
+          "mix": {
+            "good": 0.05,
+            "slow": 0.3,
+            "offline": 0.65
+          },
+          "dwell_min": 30,
+          "label": "Remote islands (Sundarbans)"
+        }
+      },
+      "STRATEGIES": [
+        "cloud",
+        "queue",
+        "saakshi"
+      ]
+    },
+    "partial_snapshot_kb": 7145.0,
+    "delta_kb_per_point": 2.82,
+    "measured_from": "docs/benchmarks/sync.json (regional layout)",
+    "local_search_ms": 26.69,
+    "scenarios": {
+      "city": {
+        "label": "City ward (Kolkata)",
+        "mix": {
+          "good": 0.85,
+          "slow": 0.12,
+          "offline": 0.03
+        },
+        "cloud": {
+          "days": 30,
+          "captures_per_day": 190.3,
+          "query_answered_pct": 97.22627737226277,
+          "team_recall_pct": 96.505702721389,
+          "query_latency_ms_p50": 679.9999999999999,
+          "urgent_total": 235,
+          "urgent_delivered_pct": 99.57446808510639,
+          "urgent_photo_min_p50": 0.0,
+          "urgent_photo_min_p90": 1.0,
+          "urgent_alert_min_p50": 0.0,
+          "originals_delivered_pct": 99.36160510715914,
+          "mb_up_per_day": 614.8803058666667,
+          "mb_up_slow_per_day": 66.68113726666667,
+          "mb_down_per_day": 0.0,
+          "mb_wasted_per_day": 0.098304,
+          "faces_unblurred_per_day": 36.833333333333336,
+          "dup_uploads_per_day": 43.666666666666664,
+          "dup_mb_per_day": 142.05872093333335,
+          "skipped_dups_per_day": 0.0,
+          "compressed_per_day": 0.0,
+          "delta_pulls_per_day": 0.0,
+          "snapshot_pulls_per_day": 0.0
+        },
+        "queue": {
+          "days": 30,
+          "captures_per_day": 190.3,
+          "query_answered_pct": 100.0,
+          "team_recall_pct": 97.32184288115661,
+          "query_latency_ms_p50": 679.9999999999999,
+          "urgent_total": 235,
+          "urgent_delivered_pct": 99.57446808510639,
+          "urgent_photo_min_p50": 0.0,
+          "urgent_photo_min_p90": 1.0,
+          "urgent_alert_min_p50": 0.0,
+          "originals_delivered_pct": 99.36160510715914,
+          "mb_up_per_day": 614.8803058666667,
+          "mb_up_slow_per_day": 66.68113726666667,
+          "mb_down_per_day": 0.0,
+          "mb_wasted_per_day": 0.098304,
+          "faces_unblurred_per_day": 36.833333333333336,
+          "dup_uploads_per_day": 43.666666666666664,
+          "dup_mb_per_day": 142.05872093333335,
+          "skipped_dups_per_day": 0.0,
+          "compressed_per_day": 0.0,
+          "delta_pulls_per_day": 0.0,
+          "snapshot_pulls_per_day": 0.0
+        },
+        "saakshi": {
+          "days": 30,
+          "captures_per_day": 190.3,
+          "query_answered_pct": 100.0,
+          "team_recall_pct": 97.9866508280564,
+          "query_latency_ms_p50": 26.690549999693758,
+          "urgent_total": 235,
+          "urgent_delivered_pct": 99.57446808510639,
+          "urgent_photo_min_p50": 0.0,
+          "urgent_photo_min_p90": 0.0,
+          "urgent_alert_min_p50": 0.0,
+          "originals_delivered_pct": 98.86000911992704,
+          "mb_up_per_day": 383.16824136666673,
+          "mb_up_slow_per_day": 6.032913566666667,
+          "mb_down_per_day": 843.5372080173352,
+          "mb_wasted_per_day": 0.0981504,
+          "faces_unblurred_per_day": 0.0,
+          "dup_uploads_per_day": 0.0,
+          "dup_mb_per_day": 0.0,
+          "skipped_dups_per_day": 43.7,
+          "compressed_per_day": 2.966666666666667,
+          "delta_pulls_per_day": 176.76666666666668,
+          "snapshot_pulls_per_day": 115.16666666666667
+        }
+      },
+      "rural": {
+        "label": "Rural block",
+        "mix": {
+          "good": 0.35,
+          "slow": 0.4,
+          "offline": 0.25
+        },
+        "cloud": {
+          "days": 30,
+          "captures_per_day": 190.3,
+          "query_answered_pct": 78.10218978102189,
+          "team_recall_pct": 76.51913817955166,
+          "query_latency_ms_p50": 7150.0,
+          "urgent_total": 235,
+          "urgent_delivered_pct": 99.57446808510639,
+          "urgent_photo_min_p50": 2.0,
+          "urgent_photo_min_p90": 28.800000000000068,
+          "urgent_alert_min_p50": 2.0,
+          "originals_delivered_pct": 98.72321021431829,
+          "mb_up_per_day": 614.2950401666668,
+          "mb_up_slow_per_day": 287.0513847666667,
+          "mb_down_per_day": 0.0,
+          "mb_wasted_per_day": 4.480922333333334,
+          "faces_unblurred_per_day": 36.7,
+          "dup_uploads_per_day": 43.233333333333334,
+          "dup_mb_per_day": 140.59701876666665,
+          "skipped_dups_per_day": 0.0,
+          "compressed_per_day": 0.0,
+          "delta_pulls_per_day": 0.0,
+          "snapshot_pulls_per_day": 0.0
+        },
+        "queue": {
+          "days": 30,
+          "captures_per_day": 190.3,
+          "query_answered_pct": 100.0,
+          "team_recall_pct": 80.15112270165434,
+          "query_latency_ms_p50": 679.9999999999999,
+          "urgent_total": 235,
+          "urgent_delivered_pct": 99.57446808510639,
+          "urgent_photo_min_p50": 2.0,
+          "urgent_photo_min_p90": 28.800000000000068,
+          "urgent_alert_min_p50": 2.0,
+          "originals_delivered_pct": 98.72321021431829,
+          "mb_up_per_day": 614.2950401666668,
+          "mb_up_slow_per_day": 287.0513847666667,
+          "mb_down_per_day": 0.0,
+          "mb_wasted_per_day": 4.480922333333334,
+          "faces_unblurred_per_day": 36.7,
+          "dup_uploads_per_day": 43.233333333333334,
+          "dup_mb_per_day": 140.59701876666665,
+          "skipped_dups_per_day": 0.0,
+          "compressed_per_day": 0.0,
+          "delta_pulls_per_day": 0.0,
+          "snapshot_pulls_per_day": 0.0
+        },
+        "saakshi": {
+          "days": 30,
+          "captures_per_day": 190.3,
+          "query_answered_pct": 100.0,
+          "team_recall_pct": 94.87328180536544,
+          "query_latency_ms_p50": 26.690549999693758,
+          "urgent_total": 235,
+          "urgent_delivered_pct": 99.57446808510639,
+          "urgent_photo_min_p50": 1.0,
+          "urgent_photo_min_p90": 24.0,
+          "urgent_alert_min_p50": 0.0,
+          "originals_delivered_pct": 97.44642042863657,
+          "mb_up_per_day": 326.9694631666667,
+          "mb_up_slow_per_day": 34.19223276666666,
+          "mb_down_per_day": 476.8087054800008,
+          "mb_wasted_per_day": 0.4618703666666667,
+          "faces_unblurred_per_day": 0.0,
+          "dup_uploads_per_day": 0.0,
+          "dup_mb_per_day": 0.0,
+          "skipped_dups_per_day": 43.46666666666667,
+          "compressed_per_day": 20.366666666666667,
+          "delta_pulls_per_day": 159.4,
+          "snapshot_pulls_per_day": 65.03333333333333
+        }
+      },
+      "remote": {
+        "label": "Remote islands (Sundarbans)",
+        "mix": {
+          "good": 0.05,
+          "slow": 0.3,
+          "offline": 0.65
+        },
+        "cloud": {
+          "days": 30,
+          "captures_per_day": 190.3,
+          "query_answered_pct": 37.08029197080292,
+          "team_recall_pct": 29.286250762541925,
+          "query_latency_ms_p50": 7150.0,
+          "urgent_total": 235,
+          "urgent_delivered_pct": 87.65957446808511,
+          "urgent_photo_min_p50": 32.5,
+          "urgent_photo_min_p90": 189.0,
+          "urgent_alert_min_p50": 32.5,
+          "originals_delivered_pct": 86.50250797993615,
+          "mb_up_per_day": 543.3699605666667,
+          "mb_up_slow_per_day": 433.6521336,
+          "mb_down_per_day": 0.0,
+          "mb_wasted_per_day": 9.969257166666667,
+          "faces_unblurred_per_day": 32.1,
+          "dup_uploads_per_day": 37.333333333333336,
+          "dup_mb_per_day": 121.27582266666668,
+          "skipped_dups_per_day": 0.0,
+          "compressed_per_day": 0.0,
+          "delta_pulls_per_day": 0.0,
+          "snapshot_pulls_per_day": 0.0
+        },
+        "queue": {
+          "days": 30,
+          "captures_per_day": 190.3,
+          "query_answered_pct": 100.0,
+          "team_recall_pct": 44.68938907497131,
+          "query_latency_ms_p50": 26.690549999693758,
+          "urgent_total": 235,
+          "urgent_delivered_pct": 87.65957446808511,
+          "urgent_photo_min_p50": 32.5,
+          "urgent_photo_min_p90": 189.0,
+          "urgent_alert_min_p50": 32.5,
+          "originals_delivered_pct": 86.50250797993615,
+          "mb_up_per_day": 543.3699605666667,
+          "mb_up_slow_per_day": 433.6521336,
+          "mb_down_per_day": 0.0,
+          "mb_wasted_per_day": 9.969257166666667,
+          "faces_unblurred_per_day": 32.1,
+          "dup_uploads_per_day": 37.333333333333336,
+          "dup_mb_per_day": 121.27582266666668,
+          "skipped_dups_per_day": 0.0,
+          "compressed_per_day": 0.0,
+          "delta_pulls_per_day": 0.0,
+          "snapshot_pulls_per_day": 0.0
+        },
+        "saakshi": {
+          "days": 30,
+          "captures_per_day": 190.3,
+          "query_answered_pct": 100.0,
+          "team_recall_pct": 70.52091621821022,
+          "query_latency_ms_p50": 26.690549999693758,
+          "urgent_total": 235,
+          "urgent_delivered_pct": 91.06382978723404,
+          "urgent_photo_min_p50": 20.5,
+          "urgent_photo_min_p90": 110.10000000000005,
+          "urgent_alert_min_p50": 16.0,
+          "originals_delivered_pct": 86.52530779753762,
+          "mb_up_per_day": 148.9284254,
+          "mb_up_slow_per_day": 66.89132566666666,
+          "mb_down_per_day": 169.29734787333334,
+          "mb_wasted_per_day": 0.4535447,
+          "faces_unblurred_per_day": 0.0,
+          "dup_uploads_per_day": 0.0,
+          "dup_mb_per_day": 0.0,
+          "skipped_dups_per_day": 39.9,
+          "compressed_per_day": 66.76666666666667,
+          "delta_pulls_per_day": 62.166666666666664,
+          "snapshot_pulls_per_day": 23.066666666666666
+        }
+      }
+    }
+  }
+}

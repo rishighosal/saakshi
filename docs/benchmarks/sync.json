@@ -1,0 +1,121 @@
+{
+  "machine": {
+    "python": "3.12.10",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 140 Stepping 2, GenuineIntel",
+    "cpus": 8,
+    "date": "2026-09-30 08:08"
+  },
+  "per_project": 2000,
+  "new_points_per_project": 50,
+  "server": {
+    "global": {
+      "kind": "Qdrant Cloud",
+      "version": "1.19.1",
+      "cluster_mode": "enabled"
+    },
+    "regional": {
+      "kind": "Qdrant Cloud",
+      "version": "1.19.1",
+      "cluster_mode": "enabled"
+    }
+  },
+  "global": {
+    "layout": "global",
+    "projects": 5,
+    "points_per_project": 2000,
+    "optimizer_settle_s": 26.1,
+    "first_pull": {
+      "status": 200,
+      "bytes": 29378048,
+      "ms": 8556.29119999503,
+      "load_ms": 578.5351000013179,
+      "points": 10000
+    },
+    "no_change": {
+      "status": 200,
+      "bytes": 29102080,
+      "ms": 11815.047699994466
+    },
+    "one_point": {
+      "delta": {
+        "bytes": 3154,
+        "points": 1,
+        "ms": 1294.8850999964634,
+        "bytes_per_point": 3154.0
+      },
+      "partial": {
+        "status": 200,
+        "bytes": 29280768,
+        "ms": 6257.7788999988115
+      }
+    },
+    "incremental_delta": {
+      "bytes": 721742,
+      "points": 250,
+      "ms": 5357.100100001844,
+      "bytes_per_point": 2886.968
+    },
+    "incremental_pull": {
+      "status": 200,
+      "bytes": 29893632,
+      "ms": 6387.940100001288,
+      "apply_ms": 1573.350999999093,
+      "points_after": 10251
+    },
+    "naive_repull": {
+      "status": 200,
+      "bytes": 30169088,
+      "ms": 6429.5253999953275
+    }
+  },
+  "regional": {
+    "layout": "regional",
+    "projects": 5,
+    "points_per_project": 2000,
+    "optimizer_settle_s": 2.7,
+    "first_pull": {
+      "status": 200,
+      "bytes": 7166976,
+      "ms": 10001.667099997576,
+      "load_ms": 571.2606000015512,
+      "points": 2000
+    },
+    "no_change": {
+      "status": 200,
+      "bytes": 7137792,
+      "ms": 4582.214399997611
+    },
+    "one_point": {
+      "delta": {
+        "bytes": 3171,
+        "points": 1,
+        "ms": 1186.801199997717,
+        "bytes_per_point": 3171.0
+      },
+      "partial": {
+        "status": 200,
+        "bytes": 7316480,
+        "ms": 4205.240399998729
+      }
+    },
+    "incremental_delta": {
+      "bytes": 144562,
+      "points": 50,
+      "ms": 2108.3594000010635,
+      "bytes_per_point": 2891.24
+    },
+    "incremental_pull": {
+      "status": 200,
+      "bytes": 7436288,
+      "ms": 5579.959900001995,
+      "apply_ms": 1723.2949000026565,
+      "points_after": 2051
+    },
+    "naive_repull": {
+      "status": 200,
+      "bytes": 7464960,
+      "ms": 4171.072199998889
+    }
+  }
+}
