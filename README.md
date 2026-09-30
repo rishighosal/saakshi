@@ -196,7 +196,7 @@ docs/                  WHY, PS03 deep dive, benchmarks, comparison, deploy, setu
 
 | Name | Role | GitHub |
 |---|---|---|
-| Sudip Manna | Team leader; cloud platform: Cloudinary pipeline and Impact backend (PS02) | [@Sudip-005](https://github.com/Sudip-005) |
+| Sudip Manna | Team leader; cloud platform: Cloudinary pipeline and Impact backend  | [@Sudip-005](https://github.com/Sudip-005) |
 | Rishi Ghosal | Architect and lead developer: edge memory, sync engine, benchmarks and system integration | [@rishighosal](https://github.com/rishighosal) |
 | Agnibha Kundu | Frontend & UX: both UIs, tour, PWA, screenshots | [@Agnibhakundu350](https://github.com/Agnibhakundu350) |
 | Subhankar Nandi | DevOps, testing & docs | [@Subhankarnandi777](https://github.com/Subhankarnandi777) |
