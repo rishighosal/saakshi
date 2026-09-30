@@ -1,0 +1,61 @@
+{
+  "organisation": "Green Delta Collective (demo NGO)",
+  "projects": [
+    {
+      "id": "storm-cleanup-salt-lake",
+      "name": "Storm Clean-up, Salt Lake",
+      "activity": "Clearing storm debris and waste",
+      "description": "Volunteers clear storm debris and waste around offices, labour shelters and the Nalban waterbody in Salt Lake, Kolkata. Each spot is photographed when it is reported and again after the clean-up.",
+      "lat": 22.5697,
+      "lon": 88.4292,
+      "radius_m": 2000,
+      "start_date": "2017-05-01",
+      "end_date": "2018-06-30",
+      "sites": [
+        {
+          "id": "sector-v-courtyard",
+          "name": "Sector V courtyard",
+          "lat": 22.5701,
+          "lon": 88.42833
+        },
+        {
+          "id": "block-gn-shelters",
+          "name": "Block GN shelters",
+          "lat": 22.56916,
+          "lon": 88.43018
+        }
+      ]
+    },
+    {
+      "id": "mangroves-hingalganj",
+      "name": "Mangrove Restoration, Hingalganj",
+      "activity": "Mangrove planting on river embankments",
+      "description": "Planting and fencing mangrove strips along the Ichhamati embankment in Hingalganj, Sundarbans, to slow erosion and protect villages from storm surges.",
+      "lat": 22.4635,
+      "lon": 88.9955,
+      "radius_m": 3000,
+      "start_date": "2025-04-01",
+      "end_date": "2026-12-31",
+      "sites": [
+        {
+          "id": "plantation-strip",
+          "name": "Plantation strip",
+          "lat": 22.46025,
+          "lon": 88.9934
+        },
+        {
+          "id": "village-ghat",
+          "name": "Village ghat",
+          "lat": 22.4628,
+          "lon": 88.994
+        },
+        {
+          "id": "north-bank",
+          "name": "North bank",
+          "lat": 22.46504,
+          "lon": 88.99435
+        }
+      ]
+    }
+  ]
+}

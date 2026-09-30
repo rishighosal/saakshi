@@ -1,0 +1,31 @@
+# Lint rules this project holds itself to: `ruff check .`
+# The code keeps typing.Dict/Optional annotations consistently, so the pyupgrade
+# (UP) rewrites are not selected.
+target-version = "py310"
+line-length = 160
+extend-exclude = [".venv"]
+
+[lint]
+select = [
+    "E4", "E7", "E9",  # syntax and statement errors
+    "F",               # pyflakes: unused imports and variables, undefined names
+    "I",               # import order
+    "B",               # likely bugs
+    "C4",              # comprehensions
+    "PERF",            # needless work in loops
+    "S110", "S112",    # except: pass / continue that hides a failure
+    "RUF100",          # stale noqa comments
+]
+ignore = [
+    "PERF203",  # per-item error handling inside loops is deliberate
+    "PERF401",  # line-building loops read better than comprehensions here
+    "C408",     # keyword-style dict(...) calls are kept for readability
+    "B905",     # zip(strict=) would change benchmark behaviour
+]
+
+[lint.flake8-bugbear]
+# FastAPI declares request parameters this way
+extend-immutable-calls = ["fastapi.File", "fastapi.Form", "fastapi.Header", "fastapi.Query", "fastapi.Depends"]
+
+[lint.per-file-ignores]
+"tests/*" = ["S110"]  # best-effort cleanup of test servers and collections

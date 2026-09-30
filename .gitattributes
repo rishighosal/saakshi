@@ -1,0 +1,5 @@
+# Same line endings on every OS (the apps and CI run on Linux too)
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.gif binary

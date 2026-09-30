@@ -1,0 +1,21 @@
+# Runtime
+fastapi>=0.110,<1.0
+uvicorn[standard]>=0.29
+python-multipart>=0.0.9
+httpx>=0.27
+pydantic>=2.6
+python-dotenv>=1.0
+numpy>=1.26
+pillow>=10.3
+
+# Edge memory and vector search
+qdrant-edge-py==0.8.0          # tested version; the Edge API is in beta, keep this pinned
+qdrant-client>=1.15
+fastembed>=0.7,<0.9            # CLIP ViT-B/32 on CPU via ONNX
+opencv-python-headless>=4.9,<5  # on-device face detection (Haar cascades were removed in OpenCV 5)
+
+# Media platform
+cloudinary>=1.40
+
+# Tests
+pytest>=8.0
