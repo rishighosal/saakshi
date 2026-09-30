@@ -1,10 +1,14 @@
 # Render blueprint for the cloud side (Impact). Qdrant: use a free Qdrant Cloud cluster.
+# The free plan has 512 MB of memory and no persistent disk: CLIP (about 690 MB) is off on the
+# server, and after every restart Impact rebuilds itself from Cloudinary (tags, captions, checks,
+# pairs and campaign images come back without new AI Vision calls).
 services:
   - type: web
     name: saakshi-impact
     runtime: docker
     dockerfilePath: ./Dockerfile
     plan: free
+    healthCheckPath: /api/health
     envVars:
       - key: CLOUDINARY_URL
         sync: false
@@ -14,5 +18,17 @@ services:
         sync: false
       - key: INGEST_TOKEN
         generateValue: true
+      - key: CLOUDINARY_FOLDER
+        value: saakshi-live
+      - key: QDRANT_COLLECTION
+        value: saakshi_live
+      - key: PUBLIC_DEMO
+        value: "1"
+      - key: SAAKSHI_DISABLE_CLIP
+        value: "1"
+      - key: AI_VISION_ENABLED
+        value: "false"
+      - key: REPO_URL
+        value: https://github.com/rishighosal/saakshi
       - key: IMPACT_HOST
         value: 0.0.0.0

@@ -584,6 +584,8 @@ class ImpactService:
                         "download": transforms.attachment(url, "before-after-wide"), "steps": transforms.explain(t)})
             self.db.add_derivative("campaign", "Before/after link preview", t, url, pair_id=pair_id)
             base = a
+            if a.get("public_id"):  # remembered with the "after" photo, so a rebuild can show the same pack
+                self.store.update(a["public_id"], context={"campaign_caption": caption[:300], "change_before": p["before_id"]})
         else:
             base = self.db.asset(asset_id or "")
             if not base:
@@ -775,6 +777,9 @@ class ImpactService:
             ctx = contexts.get(p["after_id"]) or {}
             if not p.get("change_text") and ctx.get("change_text") and ctx.get("change_before") == p["before_id"]:
                 self.db.x("UPDATE pairs SET change_text=? WHERE id=?", (ctx["change_text"], p["id"]))
+            # campaign images are transformation URLs: rebuilding them costs nothing
+            if ctx.get("campaign_caption") and ctx.get("change_before") == p["before_id"] and not any(d.get("purpose") == "campaign" for d in self.db.derivatives_for_pair(p["id"])):
+                self.campaign(ctx["campaign_caption"], pair_id=p["id"])
         if restored:
             self.db.event("admin", f"Restored {restored} evidence records from Cloudinary")
         return {"restored": restored}

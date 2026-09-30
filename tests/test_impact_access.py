@@ -104,6 +104,7 @@ def test_rebuild_keeps_faces_blurred_checks_and_paid_ai_text(tmp_path, photos, m
         first.ingest((photos / name).read_bytes(), name, {"note": name}, "web")
     pair = first.db.pairs()[0]
     first.describe_change(pair["id"])
+    first.campaign("Corner cleared", pair_id=pair["id"])
     before = {a["id"]: a for a in first.db.assets()}
 
     store = CloudinaryStore("demo-cloud", "k", "s", folder="saakshi")
@@ -117,3 +118,4 @@ def test_rebuild_keeps_faces_blurred_checks_and_paid_ai_text(tmp_path, photos, m
         assert a["integrity"]["checks"] == was["integrity"]["checks"] and a["integrity_score"] == was["integrity_score"]
         assert a["has_exif"] == was["has_exif"] and a["dhash"] == was["dhash"]
     assert again.db.pairs()[0]["change_text"] == first.db.pair(pair["id"])["change_text"]
+    assert len(again.present_pair(again.db.pairs()[0])["campaign"]) == 6
