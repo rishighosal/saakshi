@@ -1,0 +1,287 @@
+{
+  "about": "Real, openly licensed photos from Wikimedia Commons used as the demo's evidence. The organisation, projects and notes are fictional. scripts/fetch_sample_photos.py downloads them; scripts/seed_demo.py sends them to the field devices in 'seed_order' ('--for-video' leaves out the photos marked 'live_in_video', which are dropped in on camera). Credits: docs/PHOTOS.md.",
+  "photos": [
+    {
+      "file": "saltlake_storm-tarpaulin_1.jpg",
+      "title": "File:Mangled Rooftop Tarpaulin - After-effects Of Northwester - NCSM - Salt Lake City - Kolkata 20170516091530.jpg",
+      "author": "Biswarup Ganguly",
+      "license": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Mangled_Rooftop_Tarpaulin_-_After-effects_Of_Northwester_-_NCSM_-_Salt_Lake_City_-_Kolkata_20170516091530.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/32/Mangled_Rooftop_Tarpaulin_-_After-effects_Of_Northwester_-_NCSM_-_Salt_Lake_City_-_Kolkata_20170516091530.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sha1": "2fd1729f87e17437bf1b31736e69ab3034bad530",
+      "bytes": 3119220,
+      "seed": {
+        "device": "a",
+        "note": "Storm damage: rooftop tarpaulin torn off, debris across the courtyard",
+        "status": "damaged",
+        "live_in_video": true
+      }
+    },
+    {
+      "file": "saltlake_storm-tarpaulin_2.jpg",
+      "title": "File:Mangled Rooftop Tarpaulin - After-effects Of Northwester - NCSM - Salt Lake City - Kolkata 20170516091534.jpg",
+      "author": "Biswarup Ganguly",
+      "license": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Mangled_Rooftop_Tarpaulin_-_After-effects_Of_Northwester_-_NCSM_-_Salt_Lake_City_-_Kolkata_20170516091534.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Mangled_Rooftop_Tarpaulin_-_After-effects_Of_Northwester_-_NCSM_-_Salt_Lake_City_-_Kolkata_20170516091534.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sha1": "85cca125587eb936746dbfbc5174b9f70cf346c8",
+      "bytes": 3266515,
+      "seed": {
+        "device": "a",
+        "note": "",
+        "status": "",
+        "live_in_video": true
+      }
+    },
+    {
+      "file": "saltlake_courtyard-washed_1.jpg",
+      "title": "File:Office Premises Cleaning - NCSM - Kolkata 20170814160413.jpg",
+      "author": "Biswarup Ganguly",
+      "license": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Office_Premises_Cleaning_-_NCSM_-_Kolkata_20170814160413.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Office_Premises_Cleaning_-_NCSM_-_Kolkata_20170814160413.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sha1": "5828cdca19e0d272568f2f40bfb98f14222cdcc9",
+      "bytes": 2583666,
+      "seed": {
+        "device": "a",
+        "note": "Courtyard cleared and washed down",
+        "status": "completed"
+      }
+    },
+    {
+      "file": "saltlake_courtyard-washed_2.jpg",
+      "title": "File:Office Premises Cleaning - NCSM - Kolkata 20170814160425.jpg",
+      "author": "Biswarup Ganguly",
+      "license": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Office_Premises_Cleaning_-_NCSM_-_Kolkata_20170814160425.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/6c/Office_Premises_Cleaning_-_NCSM_-_Kolkata_20170814160425.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sha1": "cec7672cdb9a64e785d43d4e2036dc57ebe62e7b",
+      "bytes": 2717945,
+      "seed": {
+        "device": "a",
+        "note": "Debris gone, floor swept and hosed",
+        "status": "completed"
+      }
+    },
+    {
+      "file": "saltlake_shelter_1.jpg",
+      "title": "File:Destroyed Labour Shelter - 2018-04-17 Norwester Aftermath - 34-1 - Block GN - Sector V - Salt Lake City - Kolkata 20180418132246.jpg",
+      "author": "Biswarup Ganguly",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Destroyed_Labour_Shelter_-_2018-04-17_Norwester_Aftermath_-_34-1_-_Block_GN_-_Sector_V_-_Salt_Lake_City_-_Kolkata_20180418132246.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/47/Destroyed_Labour_Shelter_-_2018-04-17_Norwester_Aftermath_-_34-1_-_Block_GN_-_Sector_V_-_Salt_Lake_City_-_Kolkata_20180418132246.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sha1": "1f5ced6a996b7882d9c24c70c4bf4c53f2f97e5c",
+      "bytes": 2229754,
+      "seed": {
+        "device": "a",
+        "note": "Labour shelter collapsed in the storm, families without cover",
+        "status": "needs_attention",
+        "live_in_video": true
+      }
+    },
+    {
+      "file": "saltlake_shelter_2.jpg",
+      "title": "File:Destroyed Labour Shelter - 2018-04-17 Norwester Aftermath - 34-1 - Block GN - Sector V - Salt Lake City - Kolkata 20180418132329.jpg",
+      "author": "Biswarup Ganguly",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Destroyed_Labour_Shelter_-_2018-04-17_Norwester_Aftermath_-_34-1_-_Block_GN_-_Sector_V_-_Salt_Lake_City_-_Kolkata_20180418132329.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Destroyed_Labour_Shelter_-_2018-04-17_Norwester_Aftermath_-_34-1_-_Block_GN_-_Sector_V_-_Salt_Lake_City_-_Kolkata_20180418132329.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sha1": "51166a4083ddbd7518e3681639d6baabcfc8d0ea",
+      "bytes": 2339654,
+      "seed": {
+        "device": "b",
+        "note": "Roof sheets gathered up, the shelter is being rebuilt",
+        "status": "in_progress"
+      }
+    },
+    {
+      "file": "hingalganj_north-bank.jpg",
+      "title": "File:PXL 20250518 070423311.MP Hingalganj mangrove plantation Sundarbans and People and River Icchamati 04.jpg",
+      "author": "Sourabh.biswas003",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:PXL_20250518_070423311.MP_Hingalganj_mangrove_plantation_Sundarbans_and_People_and_River_Icchamati_04.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/ad/PXL_20250518_070423311.MP_Hingalganj_mangrove_plantation_Sundarbans_and_People_and_River_Icchamati_04.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sha1": "72a7aa3817c57fc69acb511e0c818d718505d9d5",
+      "bytes": 8662180,
+      "seed": {
+        "device": "b",
+        "note": "Breach risk: bank eroding next to the moored boats",
+        "status": "needs_attention"
+      }
+    },
+    {
+      "file": "hingalganj_village-ghat.jpg",
+      "title": "File:PXL 20250518 070423311.MP Hingalganj mangrove plantation Sundarbans and People and River Icchamati 07.jpg",
+      "author": "Sourabh.biswas003",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:PXL_20250518_070423311.MP_Hingalganj_mangrove_plantation_Sundarbans_and_People_and_River_Icchamati_07.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/ce/PXL_20250518_070423311.MP_Hingalganj_mangrove_plantation_Sundarbans_and_People_and_River_Icchamati_07.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sha1": "f85c7158d8fbec987e9d62b0afa94f72f22d6968",
+      "bytes": 3896484,
+      "seed": {
+        "device": "b",
+        "note": "Boats back at the village ghat, bank holding here",
+        "status": ""
+      }
+    },
+    {
+      "file": "hingalganj_plantation-fence.jpg",
+      "title": "File:PXL 20250518 070423311.MP Hingalganj mangrove plantation Sundarbans and People and River Icchamati 12.jpg",
+      "author": "Sourabh.biswas003",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:PXL_20250518_070423311.MP_Hingalganj_mangrove_plantation_Sundarbans_and_People_and_River_Icchamati_12.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/58/PXL_20250518_070423311.MP_Hingalganj_mangrove_plantation_Sundarbans_and_People_and_River_Icchamati_12.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sha1": "9d17298bd985fbebb596e2e2dc63865185e49ebd",
+      "bytes": 6450786,
+      "seed": {
+        "device": "b",
+        "note": "Fence around the new plantation strip is intact",
+        "status": "in_progress"
+      }
+    },
+    {
+      "file": "hingalganj_creek-edge_1.jpg",
+      "title": "File:PXL 20250518 070423311.MP Hingalganj mangrove plantation Sundarbans and People and River Icchamati 13.jpg",
+      "author": "Sourabh.biswas003",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:PXL_20250518_070423311.MP_Hingalganj_mangrove_plantation_Sundarbans_and_People_and_River_Icchamati_13.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/92/PXL_20250518_070423311.MP_Hingalganj_mangrove_plantation_Sundarbans_and_People_and_River_Icchamati_13.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sha1": "77d4cbe41cda7267d615607758998913cc6f900b",
+      "bytes": 5949046,
+      "seed": {
+        "device": "b",
+        "note": "Saltmarsh grass holding the creek edge",
+        "status": "in_progress"
+      }
+    },
+    {
+      "file": "hingalganj_creek-edge_2.jpg",
+      "title": "File:PXL 20250518 070423311.MP Hingalganj mangrove plantation Sundarbans and People and River Icchamati 14.jpg",
+      "author": "Sourabh.biswas003",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:PXL_20250518_070423311.MP_Hingalganj_mangrove_plantation_Sundarbans_and_People_and_River_Icchamati_14.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/19/PXL_20250518_070423311.MP_Hingalganj_mangrove_plantation_Sundarbans_and_People_and_River_Icchamati_14.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sha1": "0611bd4a80fa1d37319eb3558b923defdc96839a",
+      "bytes": 4778046,
+      "seed": {
+        "device": "b",
+        "note": "",
+        "status": ""
+      }
+    },
+    {
+      "file": "hingalganj_mangrove-flowers.jpg",
+      "title": "File:PXL 20250518 070423311.MP Hingalganj mangrove plantation Sundarbans and People and River Icchamati 16.jpg",
+      "author": "Sourabh.biswas003",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:PXL_20250518_070423311.MP_Hingalganj_mangrove_plantation_Sundarbans_and_People_and_River_Icchamati_16.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/db/PXL_20250518_070423311.MP_Hingalganj_mangrove_plantation_Sundarbans_and_People_and_River_Icchamati_16.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sha1": "023bd7c2071119f9f501f171560ed46e601845a1",
+      "bytes": 5872497,
+      "seed": {
+        "device": "b",
+        "note": "Mangroves flowering on the planted strip",
+        "status": "in_progress"
+      }
+    },
+    {
+      "file": "hingalganj_embankment-grass.jpg",
+      "title": "File:PXL 20250518 070423311.MP Hingalganj mangrove plantation Sundarbans and People and River Icchamati 17.jpg",
+      "author": "Sourabh.biswas003",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:PXL_20250518_070423311.MP_Hingalganj_mangrove_plantation_Sundarbans_and_People_and_River_Icchamati_17.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/04/PXL_20250518_070423311.MP_Hingalganj_mangrove_plantation_Sundarbans_and_People_and_River_Icchamati_17.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sha1": "c71978d6dd91a0241ac8bafff01253bb9b5b1f5f",
+      "bytes": 3480891,
+      "seed": {
+        "device": "b",
+        "note": "Grass cover along the embankment path",
+        "status": ""
+      }
+    },
+    {
+      "file": "hingalganj_river-bend.jpg",
+      "title": "File:PXL 20250518 070423311.MP Hingalganj mangrove plantation Sundarbans and People and River Icchamati 20.jpg",
+      "author": "Sourabh.biswas003",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:PXL_20250518_070423311.MP_Hingalganj_mangrove_plantation_Sundarbans_and_People_and_River_Icchamati_20.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b6/PXL_20250518_070423311.MP_Hingalganj_mangrove_plantation_Sundarbans_and_People_and_River_Icchamati_20.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sha1": "ae83c9e3ca43cf538d858141c177453344199012",
+      "bytes": 5253790
+    },
+    {
+      "file": "hingalganj_old-mangroves.jpg",
+      "title": "File:PXL 20250518 070423311.MP Hingalganj mangrove plantation Sundarbans and People and River Icchamati 22.jpg",
+      "author": "Sourabh.biswas003",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:PXL_20250518_070423311.MP_Hingalganj_mangrove_plantation_Sundarbans_and_People_and_River_Icchamati_22.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/84/PXL_20250518_070423311.MP_Hingalganj_mangrove_plantation_Sundarbans_and_People_and_River_Icchamati_22.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sha1": "4c2a82c5d188bd613c71c26fd8bfccdfb63c10c8",
+      "bytes": 6783966,
+      "seed": {
+        "device": "b",
+        "note": "Older mangrove belt behind the new strip, dense and healthy",
+        "status": "completed"
+      }
+    }
+  ],
+  "derived": [
+    {
+      "file": "IMG-20250519-WA0007.jpg",
+      "from": "hingalganj_river-bend.jpg",
+      "how": "whatsapp",
+      "about": "Re-saved at 1600 px without metadata, as WhatsApp does: no location or time",
+      "seed": {
+        "device": "b",
+        "note": "Forwarded on WhatsApp by the village volunteer",
+        "status": "",
+        "project": "mangroves-hingalganj"
+      }
+    },
+    {
+      "file": "schoolyard_reposted.jpg",
+      "from": "saltlake_courtyard-washed_1.jpg",
+      "how": "repost",
+      "about": "The Salt Lake courtyard photo, cropped slightly and re-saved without metadata, submitted as if from another project",
+      "seed": {
+        "device": "b",
+        "note": "School yard cleaned after the tide",
+        "status": "completed",
+        "project": "mangroves-hingalganj"
+      }
+    }
+  ],
+  "seed_order": [
+    "saltlake_shelter_2.jpg",
+    "hingalganj_north-bank.jpg",
+    "hingalganj_plantation-fence.jpg",
+    "hingalganj_creek-edge_1.jpg",
+    "hingalganj_village-ghat.jpg",
+    "hingalganj_creek-edge_2.jpg",
+    "hingalganj_mangrove-flowers.jpg",
+    "hingalganj_embankment-grass.jpg",
+    "hingalganj_old-mangroves.jpg",
+    "saltlake_courtyard-washed_1.jpg",
+    "saltlake_courtyard-washed_2.jpg",
+    "IMG-20250519-WA0007.jpg",
+    "schoolyard_reposted.jpg",
+    "saltlake_storm-tarpaulin_1.jpg",
+    "saltlake_shelter_1.jpg",
+    "saltlake_storm-tarpaulin_2.jpg"
+  ]
+}
